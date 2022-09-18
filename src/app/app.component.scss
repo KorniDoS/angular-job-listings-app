@@ -1,0 +1,119 @@
+/* Front-end Style Guide
+
+## Layout
+
+The designs were created to the following widths:
+
+- Mobile: 375px
+- Desktop: 1440px
+
+## Colors
+
+### Primary
+
+- Desaturated Dark Cyan: hsl(180, 29%, 50%)
+
+### Neutral
+
+- Light Grayish Cyan (Background): hsl(180, 52%, 96%)
+- Light Grayish Cyan (Filter Tablets): hsl(180, 31%, 95%)
+- Dark Grayish Cyan: hsl(180, 8%, 52%)
+- Very Dark Grayish Cyan: hsl(180, 14%, 20%)
+
+## Typography
+
+### Body Copy
+
+- Font size: 15px
+
+### Headings
+
+- Family: [League Spartan](https://fonts.google.com/specimen/League+Spartan)
+- Weights: 500, 700
+*/
+
+@use 'src/colours';
+
+$container-sm: 540px;
+$container-md: 740px;
+$container-lg: 960px;
+$container-xlg: 1140px;
+$container-xxlg: 1300px;
+
+
+header{
+    height: 150px;
+}
+
+
+picture{
+    img{
+        width: 100%;
+        height: 100%;
+        background-blend-mode: darken;
+        background-color: colours.$desat-dark-cyan;
+    }
+}
+
+
+main{
+    background-color: transparent;
+}
+
+
+.container {
+    max-width: 80%;
+    padding: 2rem 2rem 2rem 1rem;
+    margin-block-start: 2rem;
+    margin-inline: auto;
+    background-color: white;
+
+
+    @media screen and (min-width: 576px) {
+
+        width: $container-sm !important;
+
+    }
+
+    @media screen and (min-width: 768px) {
+
+        width: $container-md !important;
+
+    }
+
+
+    @media screen and (min-width: 992px) {
+
+        width: $container-lg !important;
+
+    }
+
+    @media screen and (min-width: 1200px) {
+
+        width: $container-xlg !important;
+
+    }
+
+    @media screen and (min-width: 1400px) {
+
+        width: $container-xxlg !important;
+
+    }
+}
+
+.card{
+border-left: 6px solid colours.$desat-dark-cyan;
+border-radius: 8px;
+position: relative;
+
+.avatar{
+    position: absolute;
+    top: -23px;
+    left: 15px;
+    width: 3.125rem;
+
+    img{
+       width: 100%;
+    }
+}
+}
