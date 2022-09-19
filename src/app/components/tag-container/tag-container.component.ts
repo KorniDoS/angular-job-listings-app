@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { JobService } from 'src/app/services/job.service';
 
 @Component({
@@ -6,14 +7,16 @@ import { JobService } from 'src/app/services/job.service';
   templateUrl: './tag-container.component.html',
   styleUrls: ['./tag-container.component.scss']
 })
-export class TagContainerComponent implements OnInit {
+export class TagContainerComponent implements OnInit, OnDestroy {
 
   constructor(private jobService: JobService) { }
 
   currentTags: string[] = [];
 
+  languageSelectedSub!: Subscription;
+
   ngOnInit(): void {
-    this.jobService.languageSelected.subscribe(
+    this.languageSelectedSub = this.jobService.languageSelected.subscribe(
       lang => {
         if (this.currentTags.includes(lang)) {
           return;
@@ -23,6 +26,10 @@ export class TagContainerComponent implements OnInit {
         }
       }
     )
+  }
+
+  ngOnDestroy(): void {
+    this.languageSelectedSub.unsubscribe();
   }
 
   removeFromTag(id: number) {
