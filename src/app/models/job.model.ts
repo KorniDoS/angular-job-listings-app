@@ -10,6 +10,6 @@ export interface JobModel{
     postedAt: string;
     contract: string;
     location: string;
-    languages: Array<string | undefined | null>;
-    tools: Array<string | undefined | null>;
+    languages?: string[] | undefined | null;
+    tools?: string[] | undefined | null;
 }
