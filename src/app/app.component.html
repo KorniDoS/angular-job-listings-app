@@ -5,27 +5,40 @@
       </picture> 
 </header>
 
+<app-tag-container></app-tag-container>
+
 <main *ngIf="jobs">
-<div *ngFor="let job of jobs" class="container card">
+<div *ngFor="let job of jobs" class="container card" [ngClass]="{'new': job.new || job.featured, 'old' : !job.new}">
     <div class="avatar">
         <img [src]="job.logo" [alt]="job.company">
     </div>
 
     <div class="role-stats">
-        <div>
+        <div class="role-features">
             <h4>{{job.company}}</h4>
 
-            <div>
-                <span *ngIf="job.new">NEW!</span>
-                <span *ngIf="job.featured">FEATURED</span>
+            <div class="role-features">
+                <span class="role-features__new" *ngIf="job.new">{{'new!' | uppercase}}</span>
+                <span class="role-features__featured" *ngIf="job.featured">{{'featured' | uppercase}}</span>
             </div>
         </div>
 
         <div>
-            <h4>{{job.position}}</h4>
+            <h4 class="job-position">{{job.position}}</h4>
+
+            <div class="job-details">
+                <ul>
+                    <li>{{job.postedAt}}</li>
+                    <li>{{job.contract}}</li>
+                    <li>{{job.location}}</li>
+
+                </ul>
+            </div>
+
+            <hr>
 
             <div class="details">
-                <span *ngFor="let languages of job.languages; let i = index">{{languages}}<span *ngIf="i < job.languages.length - 1">, </span></span>
+                <app-language [currentJob]="job"></app-language>
             </div>
 
         </div>
