@@ -8,11 +8,12 @@ import { LanguageComponent } from './components/language/language.component';
 import { TagContainerComponent } from './components/tag-container/tag-container.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LanguageComponent,
-    TagContainerComponent
+    TagContainerComponent,
   ],
   imports: [
     BrowserModule,
