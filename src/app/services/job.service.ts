@@ -4,21 +4,20 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { JobModel } from '../models/job.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class JobService{
-
-  constructor(private http: HttpClient) { 
-  }
+export class JobService {
+  constructor(private http: HttpClient) {}
 
   jobSub?: Subscription;
 
-  languageSelected = new Subject<any>();
-  languageDeleted = new Subject<any>();
+  languageSelected = new Subject<string>();
+  languageDeleted = new Subject<string>();
 
-  getAllJobs(): Observable<JobModel[]>{
-    return this.http.get<JobModel[]>("assets/data.json");
+  existingTags = new Subject<string[]>();
+  clearedTags = new Subject<boolean>();
+
+  getAllJobs(): Observable<JobModel[]> {
+    return this.http.get<JobModel[]>('assets/data.json');
   }
-
-  
 }
