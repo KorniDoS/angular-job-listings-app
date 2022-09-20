@@ -1,15 +1,21 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { JobService } from 'src/app/services/job.service';
 
 @Component({
   selector: 'app-tag-container',
   templateUrl: './tag-container.component.html',
-  styleUrls: ['./tag-container.component.scss']
+  styleUrls: ['./tag-container.component.scss'],
 })
 export class TagContainerComponent implements OnInit, OnDestroy {
-
-  constructor(private jobService: JobService) { }
+  constructor(private jobService: JobService) {}
 
   currentTags: string[] = [];
 
@@ -17,15 +23,18 @@ export class TagContainerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.languageSelectedSub = this.jobService.languageSelected.subscribe(
-      lang => {
-        if (this.currentTags.includes(lang)) {
+      (lang) => {
+        if (this.currentTags.includes(lang.trim())) {
           return;
         } else {
-          this.currentTags.push(lang);
-          console.log(this.currentTags);
+          this.currentTags.push(lang.trim());
+         // console.log('Current tags : ');
+         // console.log(this.currentTags);
+          this.jobService.existingTags.next(this.currentTags);
+          //console.log(this.currentTags);
         }
       }
-    )
+    );
   }
 
   ngOnDestroy(): void {
@@ -34,12 +43,15 @@ export class TagContainerComponent implements OnInit, OnDestroy {
 
   removeFromTag(id: number) {
     this.currentTags.splice(id, 1);
-    console.log(this.currentTags);
+    this.currentTags.length !== 0
+      ? this.jobService.existingTags.next(this.currentTags)
+      : this.jobService.clearedTags.next(true);
+    // console.log(this.currentTags);
   }
 
   clearTags() {
     this.currentTags.length = 0;
-    console.log(this.currentTags);
+    this.jobService.clearedTags.next(true);
+    // console.log(this.currentTags);
   }
-
 }
