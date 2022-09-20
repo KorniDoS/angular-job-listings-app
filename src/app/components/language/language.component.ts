@@ -5,23 +5,18 @@ import { JobService } from 'src/app/services/job.service';
 @Component({
   selector: 'app-language',
   templateUrl: './language.component.html',
-  styleUrls: ['./language.component.scss']
+  styleUrls: ['./language.component.scss'],
 })
 export class LanguageComponent implements OnInit {
-
-
   @Input() currentJob: any;
-  constructor(private jobService: JobService) { }
+  constructor(private jobService: JobService) {}
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {}
+
+  sendToTag(event: Event) {
+    //console.log((<HTMLSpanElement>event.target).textContent);
+    this.jobService.languageSelected.next(
+      (<HTMLButtonElement>event.target).textContent!
+    );
   }
-
-  sendToTag(event: Event){
-    console.log((<HTMLSpanElement>event.target).textContent);
-    this.jobService.languageSelected.next((<HTMLSpanElement>event.target).textContent);
-  }
-
-
-
 }
