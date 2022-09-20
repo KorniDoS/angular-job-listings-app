@@ -240,3 +240,22 @@ main {
 .card:last-child {
   margin-block-end: 6rem;
 }
+
+
+.attribution{
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+
+  a:link, a:visited{
+    color: colours.$desat-dark-cyan;
+    text-decoration: none;
+
+  }
+
+  a:hover, a:focus{
+    text-decoration: underline;
+  }
+}
